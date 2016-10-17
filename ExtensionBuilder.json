@@ -1,0 +1,47 @@
+{
+    "modules": [
+
+    ],
+    "properties": {
+        "backendModules": [
+
+        ],
+        "description": "Bootstrap Grid Extension build with Fluid TYPO3.",
+        "emConf": {
+            "category": "plugin",
+            "custom_category": "",
+            "dependsOn": "typo3 => 7.6.0-7.6.99\n",
+            "disableLocalization": false,
+            "disableVersioning": false,
+            "skipGenerateDocumentationTemplate": false,
+            "sourceLanguage": "en",
+            "state": "alpha",
+            "targetVersion": "7.6.0-7.6.99",
+            "version": ""
+        },
+        "extensionKey": "bdm_bootstrap_grid",
+        "name": "Flux Bootstrap Grid",
+        "originalExtensionKey": "",
+        "originalVendorName": "",
+        "persons": [
+            {
+                "company": "beck digitale medien",
+                "email": "beck@beck-digitale-medien.de",
+                "name": "Benjamin Beck",
+                "role": "Developer"
+            }
+        ],
+        "plugins": [
+
+        ],
+        "vendorName": "BDM"
+    },
+    "wires": [
+
+    ],
+    "log": {
+        "last_modified": "2016-10-17 09:46",
+        "extension_builder_version": "7.6-dev",
+        "be_user": " (1)"
+    }
+}

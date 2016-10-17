@@ -1,0 +1,12 @@
+
+# cat=FLUX-BOOTSTRAP-GRID/settings/page/search; type=int; label=Search page id
+plugin.tx_fluxbootstrapgrid.settings.page.search.pageUid =
+
+plugin.tx_fluxbootstrapgrid {
+	view {
+		templateRootPath = EXT:flux_bootstrap_grid/Resources/Private/Templates/
+		partialRootPath = EXT:flux_bootstrap_grid/Resources/Private/Partials/
+		layoutRootPath = EXT:flux_bootstrap_grid/Resources/Private/Layouts/
+	}
+}
+

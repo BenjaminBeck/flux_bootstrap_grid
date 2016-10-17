@@ -1,0 +1,135 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" data-namespace-typo3-fluid="true" xmlns:theme="http://typo3.org/ns/BDM/FluxBootstrapGrid/ViewHelpers" xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers" xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers" xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+
+<f:layout name="ContentElements/Default"/>
+
+<f:section name="Configuration">
+
+	<v:variable.set name="elLabel" value="Grid-Element"/>
+	<v:variable.set name="elId" value="fluxBootrapGrid"/>
+	<v:variable.set name="description" value=""/>
+	<v:variable.set name="options" value="{useTypoScript: 0, group: 'Bootstrap Elements'}"/>
+	<v:variable.set name="bootstrapColumnCount">12</v:variable.set>
+
+	<flux:form id="{elId}" label="{elLabel}" description="{description}" options="{options}">
+
+		<f:if condition="{settings}">
+			<flux:field.select label="Anzahl der Spalten" name="settings.columnCount" items="1,2,3,4,6" default="2" requestUpdate="true"/>
+
+			<v:variable.set name="rowOptions" value="1,2,4"/>
+			<f:if condition="{v:context.get()}=='Development/DEVBOX'">
+				<v:variable.set name="rowOptions" value="1,2,3,4,6,7,8,9"/>
+			</f:if>
+			<flux:field.select label="Anzahl der Zeilen" name="settings.rowCount" items="{rowOptions}" default="1"/>
+			<flux:field.checkbox name="settings.equalwidth" label="Gleiche Spaltenbreite für alle Spalten" default="0" requestUpdate="true"/>
+			<flux:field.input name="settings.class.additional" label="Frontend: Zusätzliche CSS Klasse" default=""/>
+			<flux:field.checkbox name="settings.reverseResponsive" label="Mobil: Umgekehrte Reihenfolge (rechts zuerst / mobile first)" default=""/>
+
+			<theme:bootstrap.grid settings="{settings}" as="grid">
+
+				<f:for each="{grid.sheets}" as="sheet">
+					<flux:form.sheet name="{sheet.name}" label="{sheet.label}" shortDescription="shortd" description="{description}">
+						<f:for each="{sheet.selectFields}" as="selectFieldData">
+							<flux:field.select default="{selectFieldData.default}" name="{selectFieldData.name}" items="{selectFieldData.options}" label="{selectFieldData.label}" maxItems="1"/>
+						</f:for>
+						<f:for each="{sheet.inputFields}" as="inputFieldData">
+							<flux:field.input default="{inputFieldData.default}" name="{inputFieldData.name}" label="{inputFieldData.label}"/>
+						</f:for>
+					</flux:form.sheet>
+				</f:for>
+
+				<flux:grid>
+					<f:for each="{grid.rows}" as="row">
+						<flux:grid.row>
+							<f:for each="{row.columns}" as="column">
+								<flux:grid.column style="{column.backendStyle}" name="{column.fluxName}" label="{column.fluxLabel}"/>
+							</f:for>
+						</flux:grid.row>
+					</f:for>
+				</flux:grid>
+
+			</theme:bootstrap.grid>
+		</f:if>
+	</flux:form>
+
+
+</f:section>
+
+
+<f:section name="Preview">
+	<strong style="display: inline-block;background-color: #245EA7;color: white;padding: 1px 5px;border-radius: 3px;">Flux Bootstrap Grid</strong><br>
+	<theme:bootstrap.grid settings="{settings}" as="grid">
+		<f:if condition="{grid.isReverseOrder}">
+			<p style="padding-top: 4px;">
+				<i class="fa fa-check-square" aria-hidden="true" style="
+					font-size: 15px;
+					color: #245EA7;
+				"></i>
+				Mobil: Umgekehrte Reihenfolge (rechts zuerst / mobile first)
+			</p>
+		</f:if>
+	</theme:bootstrap.grid>
+</f:section>
+
+
+
+<f:section name="Header">
+
+</f:section>
+
+<f:section name="Main">
+	<v:variable.set name="ceClasses" value="ce-grid"/>
+
+	<v:variable.set name="debug">
+		<div class="cmp-layout-debug info">
+			Tpl: Templates/Content/CeGrid.html;<br>
+		</div>
+	</v:variable.set>
+
+
+	{v:variable.set(name:'isSubgrid',value:'0')}
+	<f:if condition="{record.tx_flux_parent} > 0">
+		{v:variable.set(name:'isSubgrid',value:'1')}
+	</f:if>
+
+
+	<f:render section="Header" arguments="{_all}"/>
+	<f:render section="Content" arguments="{_all}"/>
+
+
+</f:section>
+
+
+<f:section name="Content">
+
+	<v:variable.set name="dataEqualHeight" value=""/>
+	<f:if condition="{settings.equalheight}">
+		<v:variable.set name="dataEqualHeight"> data-mh="grid-{record.uid}" </v:variable.set>
+	</f:if>
+
+	<f:if condition="{settings}">
+		<theme:bootstrap.grid settings="{settings}" as="grid">
+
+			<f:for each="{grid.rows}" as="row">
+				<div class="row {grid.additionalCssClasses}">
+					<f:for each="{row.frontendColumns}" as="column">
+						<div {dataEqualHeight -> f:format.raw()} class="{column.frontendClasses} grid-column  layout-debug-area">
+							<flux:content.render area="{column.fluxName}"/>
+						</div>
+					</f:for>
+				</div>
+			</f:for>
+
+		</theme:bootstrap.grid>
+	</f:if>
+
+</f:section>
+
+<f:section name="ContentContainer">
+	<div class="container">
+		<f:render section="Header" arguments="{_all}"/>
+		<f:render section="Content" arguments="{_all}"/>
+	</div>
+</f:section>
+
+</html>
+

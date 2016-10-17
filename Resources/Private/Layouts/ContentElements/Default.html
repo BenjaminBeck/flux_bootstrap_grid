@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" data-namespace-typo3-fluid="true"
+		xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers" xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers"
+		xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+
+
+
+	<v:variable.set name="SectionMain"><f:render section="Main" /></v:variable.set>
+
+	<f:if condition="{contentObjectData}"><f:comment><!-- this is tx-news --></f:comment>
+		<v:variable.set name="data" value="{contentObjectData}"/>
+	</f:if>
+
+	<f:if condition="{record}"><f:comment><!-- this is fluid --></f:comment>
+		<v:variable.set name="data" value="{record}"/>
+	</f:if>
+
+	<f:if condition="{data.spaceAfter}">
+		<v:variable.set name="ceClasses" value="{ceClasses} {data.spaceAfter}"/>
+	</f:if>
+	<f:if condition="{data.spaceBefore}">
+		<v:variable.set name="ceClasses" value="{ceClasses} {data.spaceBefore}"/>
+	</f:if>
+
+	{v:variable.set(name:'isInsideGrid',value:'0')}
+	<f:if condition="{data.tx_flux_parent} > 0">
+		{v:variable.set(name:'isInsideGrid',value:'1')}
+	</f:if>
+
+
+	<div id="c{data.uid}" data-ce-type="{ceType}" data-uid="{data.uid}" class="ce-all {ceClasses -> f:format.raw()}">
+
+		<f:if condition="{isInsideGrid}">
+			<f:then>
+
+				<div class="ce-content">
+					{SectionMain -> f:format.raw()}
+				</div>
+			</f:then>
+			<f:else>
+				<div class="container">
+					<div class="ce-content">
+						{SectionMain -> f:format.raw()}
+					</div>
+				</div>
+
+			</f:else>
+		</f:if>
+	</div>
+
+
+</html>

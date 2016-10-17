@@ -1,0 +1,11 @@
+plugin.tx_fluxbootstrapgrid {
+	view {
+		templateRootPaths.0 = EXT:flux_bootstrap_grid/Resources/Private/Shared/Templates/
+
+		partialRootPaths.0 = EXT:flux_bootstrap_grid/Resources/Private/Shared/Partials/
+
+		layoutRootPaths.0 = EXT:flux_bootstrap_grid/Resources/Private/Shared/Layouts/
+	}
+
+	settings.features.skipDefaultArguments = 1
+}
