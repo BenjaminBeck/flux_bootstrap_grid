@@ -1,0 +1,26 @@
+{
+    "name": "BDM/flux_bootstrap_grid",
+    "description": "Create Responsive Bootstrap Grid-Elements",
+    "type": "typo3-cms-extension",
+    "require": {
+        "fluidtypo3/flux": "*",
+        "php": ">=5.5.0",
+        "typo3/cms-core": ">=7.6.0,<8.3"
+    },
+    "require-dev": {
+        "fluidtypo3/development": "*",
+        "fluidtypo3/flux": "dev-development"
+    },
+    "autoload": {
+        "psr-4": {
+            "BDM\\FluxBootstrapGrid\\": "Classes/"
+        }
+    },
+    "type": "typo3-cms-extension",
+    "keywords": ["TYPO3 CMS", "templating", "bootstrap", "flux", "fluidcontent", "fedext", "fluid", "grid"],
+    "homepage": "",
+    "license": "GPL-2.0+",
+    "version": "1.0.0"
+}
+
+
